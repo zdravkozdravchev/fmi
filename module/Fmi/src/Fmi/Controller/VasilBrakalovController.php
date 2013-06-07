@@ -30,15 +30,15 @@ class VasilBrakalovController extends AbstractActionController
 {
     public function indexAction()
     {
-		$entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');		
-		// $dql = "SELECT b, e, r FROM Bug b JOIN b.engineer e JOIN b.reporter r ORDER BY b.created DESC";
-		$dql = "SELECT u FROM Fmi\Entity\User u";
-		
-		$query = $entityManager->createQuery($dql);
-		$query->setMaxResults(30);
-		$users = $query->getResult();
-		
-		return new ViewModel(array('users' => $users));
+  		$entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');		
+  		// $dql = "SELECT b, e, r FROM Bug b JOIN b.engineer e JOIN b.reporter r ORDER BY b.created DESC";
+  		$dql = "SELECT u FROM Fmi\Entity\User u";
+  		
+  		$query = $entityManager->createQuery($dql);
+  		$query->setMaxResults(30);
+  		$users = $query->getResult();
+  		
+  		return new ViewModel(array('users' => $users));
     }
 
     public function addAction()
@@ -82,9 +82,10 @@ class VasilBrakalovController extends AbstractActionController
 				$entityManager->flush();
 				
                 // Redirect to list of albums
-                return $this->redirect()->toRoute('fmi');
+                return $this->redirect()->toRoute('fmi/default', array('controller' => 'vasil-brakalov', 'action'=> 'index'));
             }
         }
+         $this->layout('layout/AlexanderAlexandrov');
         return array('form' => $form);		
     }
 
@@ -144,7 +145,7 @@ class VasilBrakalovController extends AbstractActionController
 				$entityManager->flush();				
 				
                 // Redirect to list of albums
-                return $this->redirect()->toRoute('fmi');
+                 $this->redirect()->toRoute('fmi/default', array('controller' => 'vasil-brakalov', 'action'=> 'index'));
             }
         }
 
@@ -189,7 +190,7 @@ class VasilBrakalovController extends AbstractActionController
             }
 
             // Redirect to list of albums
-            return $this->redirect()->toRoute('fmi');
+             $this->redirect()->toRoute('fmi/default', array('controller' => 'vasil-brakalov', 'action'=> 'index'));
         }
 
         return array(
